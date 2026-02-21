@@ -33,7 +33,7 @@ function getBinaryPackage() {
 		process.exit(1);
 	}
 
-	const packageName = `@tsurupong/${platform}-${arch}`;
+	const packageName = `@artesync/${platform}-${arch}`;
 
 	try {
 		// We try to locate where the optional dependency was installed

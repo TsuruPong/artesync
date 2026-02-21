@@ -4,7 +4,7 @@
 
 <p align="left">
   <img src="https://img.shields.io/npm/v/artesync" alt="NPM Version" />
-  <img src="https://img.shields.io/github/actions/workflow/status/TsuruPong/ArteSync/release.yml" alt="Build Status" />
+  <img src="https://img.shields.io/github/actions/workflow/status/TsuruPong/artesync/release.yml" alt="Build Status" />
   <img src="https://img.shields.io/badge/Rust-High%20Performance-orange" alt="Built with Rust" />
   <img src="https://img.shields.io/badge/License-MIT-blue" alt="License" />
 </p>
@@ -33,7 +33,7 @@ npm install -g artesync
 _Or, if you prefer the Rust ecosystem:_
 
 ```bash
-cargo install --git https://github.com/TsuruPong/ArteSync artesync
+cargo install --git https://github.com/TsuruPong/artesync artesync
 ```
 
 ## 🏎️ Quick Start
@@ -100,8 +100,7 @@ Your declarative truth for what agent skills your project needs.
 	"description": "Project description",
 	"install-dir": ".gemini/antigravity/skills",
 	"dependencies": {
-		"skill-creator": "anthropics/skills/skills/skill-creator",
-		"react-workflow": "company/agent-skills/workflows/react#v2.0"
+		"skill-creator": "anthropics/skills/skills/skill-creator"
 	}
 }
 ```
@@ -113,8 +112,7 @@ Automatically generated mapping of skills to specific Git Commit Hashes. **Commi
 ```json
 {
 	"dependencies": {
-		"skill-creator": "a1b2c3d4e5f6g7h8i9j0",
-		"react-workflow": "z0y9x8w7v6u5t4s3r2q1"
+		"skill-creator": "a1b2c3d4e5f6g7h8i9j0"
 	}
 }
 ```

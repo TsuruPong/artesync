@@ -12,9 +12,9 @@
 	},
 	"author": "TsuruPong",
 	"optionalDependencies": {
-		"@tsurupong/win32-x64": "0.1.0",
-		"@tsurupong/darwin-x64": "0.1.0",
-		"@tsurupong/darwin-arm64": "0.1.0",
-		"@tsurupong/linux-x64": "0.1.0"
+		"@artesync/win32-x64": "0.1.0",
+		"@artesync/darwin-x64": "0.1.0",
+		"@artesync/darwin-arm64": "0.1.0",
+		"@artesync/linux-x64": "0.1.0"
 	}
 }
