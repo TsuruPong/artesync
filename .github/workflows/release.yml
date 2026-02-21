@@ -99,7 +99,7 @@ jobs:
       - name: Set Wrapper Version
         working-directory: npm/artesync
         run: |
-          npm version ${{ github.ref_name }} --no-git-tag-version
+          npm version ${{ github.ref_name }} --no-git-tag-version --allow-same-version
 
       - name: Publish Wrapper Package to NPM
         working-directory: npm/artesync
