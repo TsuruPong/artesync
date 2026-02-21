@@ -31,7 +31,7 @@ jobs:
             npm_dir: npm/darwin-arm64
             npm_os: darwin
             npm_arch: arm64
-          - os: macos-13
+          - os: macos-latest
             target: x86_64-apple-darwin
             artifact_name: arsync
             npm_dir: npm/darwin-x64
