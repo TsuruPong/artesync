@@ -1,0 +1,20 @@
+{
+	"name": "artesync",
+	"version": "0.1.0",
+	"description": "ArteSync - A lightning-fast Agent Skills syncing tool",
+	"main": "bin/arsync.js",
+	"license": "MIT",
+	"bin": {
+		"arsync": "bin/arsync.js"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "TsuruPong",
+	"optionalDependencies": {
+		"@artesync/win32-x64": "0.1.0",
+		"@artesync/darwin-x64": "0.1.0",
+		"@artesync/darwin-arm64": "0.1.0",
+		"@artesync/linux-x64": "0.1.0"
+	}
+}
