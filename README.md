@@ -1,7 +1,5 @@
 # 🌀 ArteSync
 
-> **A Lightning-Fast, Lockfile-Protected Agent Skills Syncing Tool.**
-
 <p align="left">
   <img src="https://img.shields.io/npm/v/artesync" alt="NPM Version" />
   <img src="https://img.shields.io/github/actions/workflow/status/TsuruPong/artesync/release.yml" alt="Build Status" />
