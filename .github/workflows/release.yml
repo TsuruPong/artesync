@@ -60,7 +60,7 @@ jobs:
         run: |
           cat << 'EOF' > ${{ matrix.npm_dir }}/package.json
           {
-            "name": "@artesync/${{ matrix.npm_os }}-${{ matrix.npm_arch }}",
+            "name": "@tsurupong/${{ matrix.npm_os }}-${{ matrix.npm_arch }}",
             "version": "${{ github.ref_name }}",
             "os": ["${{ matrix.npm_os }}"],
             "cpu": ["${{ matrix.npm_arch }}"],
