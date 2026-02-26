@@ -15,7 +15,7 @@ impl FileLockfileRepository {
 impl LockfileRepository for FileLockfileRepository {
     fn load(&self, path: &Path) -> Result<Lockfile, AppError> {
         if !path.exists() {
-            return Ok(Lockfile::new());
+            return Err(AppError::System(format!("Lockfile not found at {:?}", path)));
         }
 
         let content = fs::read_to_string(path).map_err(AppError::Io)?;

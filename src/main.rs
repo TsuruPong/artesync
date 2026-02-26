@@ -102,7 +102,7 @@ fn main() {
     
     let result = match &cli.command {
         Commands::Init => {
-            let usecase = InitUseCase::new(&manifest_repo, &fs);
+            let usecase = InitUseCase::new(&manifest_repo, &lockfile_repo, &fs);
             usecase.execute(&current_dir)
         },
         Commands::Install { source, owner, repository, branch, tag, path } => {

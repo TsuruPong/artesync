@@ -21,7 +21,13 @@ impl<'a, M: ManifestRepository, F: FileSystem, L: LockfileRepository> UninstallU
         let mut manifest = self.manifest_repo.load(&manifest_path)?;
 
         let lockfile_path = dir.join("skills-lock.arsync");
-        let mut lockfile = self.lockfile_repo.load(&lockfile_path).unwrap_or_else(|_| crate::core::domain::lockfile::Lockfile::new());
+        let mut lockfile = self.lockfile_repo.load(&lockfile_path).unwrap_or_else(|_| {
+            crate::core::domain::lockfile::Lockfile::new(
+                manifest.name.clone(),
+                manifest.description.clone(),
+                manifest.install_dir.clone()
+            )
+        });
 
         if !manifest.dependencies.contains_key(skill_key) {
             return Err(AppError::System(format!("Skill '{}' not found in manifest", skill_key)));

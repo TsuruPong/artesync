@@ -3,23 +3,26 @@ use crate::core::domain::manifest::Manifest;
 use crate::core::domain::skill::SkillName;
 use crate::core::domain::error::AppError;
 use crate::core::port::manifest_repository::ManifestRepository;
+use crate::core::port::lockfile_repository::LockfileRepository;
 use crate::core::port::file_system::FileSystem;
 
-pub struct InitUseCase<'a, M: ManifestRepository, F: FileSystem> {
+pub struct InitUseCase<'a, M: ManifestRepository, L: LockfileRepository, F: FileSystem> {
     manifest_repo: &'a M,
+    lockfile_repo: &'a L,
     file_system: &'a F,
 }
 
-impl<'a, M: ManifestRepository, F: FileSystem> InitUseCase<'a, M, F> {
-    pub fn new(manifest_repo: &'a M, file_system: &'a F) -> Self {
-        Self { manifest_repo, file_system }
+impl<'a, M: ManifestRepository, L: LockfileRepository, F: FileSystem> InitUseCase<'a, M, L, F> {
+    pub fn new(manifest_repo: &'a M, lockfile_repo: &'a L, file_system: &'a F) -> Self {
+        Self { manifest_repo, lockfile_repo, file_system }
     }
 
     pub fn execute(&self, dir: &Path) -> Result<(), AppError> {
         let manifest_path = dir.join("skills.arsync");
+        let lockfile_path = dir.join("skills-lock.arsync");
         
-        if self.file_system.exists(&manifest_path) {
-            return Err(AppError::System("Manifest already exists in this directory".to_string()));
+        if self.file_system.exists(&manifest_path) || self.file_system.exists(&lockfile_path) {
+            return Err(AppError::System("Manifest or Lockfile already exists in this directory".to_string()));
         }
 
         use std::io::{self, Write};
@@ -58,11 +61,13 @@ impl<'a, M: ManifestRepository, F: FileSystem> InitUseCase<'a, M, F> {
         io::stdin().read_line(&mut input_desc).unwrap();
         let final_desc = input_desc.trim().to_string();
             
-        let manifest = Manifest::new(skill_name, final_desc);
+        let manifest = Manifest::new(skill_name.clone(), final_desc.clone());
+        let lockfile = crate::core::domain::lockfile::Lockfile::new(skill_name, final_desc, None);
         
         self.manifest_repo.save(&manifest_path, &manifest)?;
+        self.lockfile_repo.save(&lockfile_path, &lockfile)?;
         
-        println!("\n{} Created skills.arsync", "✔".green().bold());
+        println!("\n{} Created skills.arsync and skills-lock.arsync", "✔".green().bold());
         Ok(())
     }
 }
