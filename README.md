@@ -1,4 +1,4 @@
-# 🌀 ArteSync
+# 🧹 ArteSync
 
 <p align="left">
   <img src="https://img.shields.io/npm/v/artesync" alt="NPM Version" />
@@ -7,31 +7,18 @@
   <img src="https://img.shields.io/badge/License-MIT-blue" alt="License" />
 </p>
 
+> 🚧 **Notice**: Currently published as an experimental tool for testing purposes. Please note that backward-incompatible changes may occur without prior notice.
+
 ## What is ArteSync?
 
-**ArteSync** is a blazingly fast CLI package manager built in Rust, designed specifically to synchronize **Agent Skills** (workflows, contextual rules, and specialized prompts for AI coding assistants like Claude, Cursor, or Gemini) across multiple projects and repositories.
-
-## ✨ Key Features
-
-- **🚀 Zero NodeJS Dependency**: Installable via NPM, but runs natively as a compiled Rust executable.
-- **🔒 Deterministic Lockfiles**: Guarantees identical skill versions for everyone on the project using `skills-lock.arsync`.
-- **⚡ Ultra-Fast Git Caching**: Fetches repositories into a global bare cache (`~/.arsync/cache`), making subsequent installs nearly instant via sparse-checkout and worktrees.
-- **🛡️ Agent Skills Validation**: Automatically parses `SKILL.md` frontmatter (`name`, `description`) to ensure compliance with Agent Skills specifications, issuing helpful warnings for misconfigured skills.
-- **💡 Smart Updates**: Uses `git ls-remote` to check remote hashes _before_ fetching, ensuring zero disk I/O if your skills are already up to date.
-- **🎨 Interactive Initialization**: Modern, `npm init`-style interactive prompts to set up your project's manifest.
+**ArteSync** is a blazingly fast CLI package manager built in Rust, designed specifically to synchronize **Agent Skills** for AI coding assistants like Claude, Cursor, or Gemini across multiple projects and repositories.
 
 ## 📦 Installation
 
-You can install ArteSync globally via `npm` (utilizing seamless optional dependencies for Windows, Mac, and Linux native binaries).
+You can install ArteSync globally via `npm`.
 
 ```bash
 npm install -g artesync
-```
-
-_Or, if you prefer the Rust ecosystem:_
-
-```bash
-cargo install --git https://github.com/TsuruPong/artesync artesync
 ```
 
 ## 🏎️ Quick Start
@@ -44,23 +31,12 @@ Run the following in the root of your project:
 arsync init
 ```
 
-This will launch an interactive prompt to set your `name` and `description`, creating a `skills.arsync` JSON manifest.
+This will launch an interactive prompt to set your `name`, `description`, and `install-dir`, creating a `skills.arsync` JSON manifest.
 
 ### 2. Configure Your Source Directory (Optional)
 
-Open `skills.arsync` and tell ArteSync where to put your synchronized skills by setting `"install-dir"`.
-
 - If `"install-dir"` is not specified, skills will be installed in the same directory as the `skills.arsync` manifest file.
 - If you specify a directory (e.g., `.gemini/antigravity/skills`), ArteSync will automatically create those folders and place all downloaded skills inside them.
-
-```json
-{
-	"name": "my-project",
-	"description": "My awesome AI-powered project",
-	"install-dir": ".gemini/antigravity/skills",
-	"dependencies": {}
-}
-```
 
 ### 3. Install a Skill
 
@@ -117,4 +93,6 @@ Automatically generated mapping of skills to specific Git Commit Hashes. **Commi
 
 ---
 
-_Created with ❤️ by the ArteSync Team. Licensed under the MIT License._
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

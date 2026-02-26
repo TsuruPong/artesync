@@ -1,4 +1,4 @@
-# 🌀 ArteSync
+# 🧹 ArteSync
 
 <p align="left">
   <img src="https://img.shields.io/npm/v/artesync" alt="NPM Version" />
@@ -7,31 +7,18 @@
   <img src="https://img.shields.io/badge/License-MIT-blue" alt="License" />
 </p>
 
+> 🚧 **Notice**: 現在、テスト用の実験的ツールとして公開しています。事前の予告なく、後方互換性のない変更が入る場合がありますのでご注意ください。
+
 ## ArteSync とは？
 
-**ArteSync** はRustで構築された爆速のパッケージマネージャーCLIであり、Claude、Cursor、GeminiなどのAIコーディングアシスタント向けの **Agent Skills**（ワークフロー、コンテキストルール、特化プロンプトなど）を複数のプロジェクトやリポジトリ間で同期するために特化して設計されています。
-
-## ✨ 主な機能
-
-- **🚀 NodeJS 依存なし**: NPM 経由でインストール可能ですが、ネイティブコンパイルされたRust実行可能ファイルとして動作します。
-- **🔒 確定的な Lockfile**: `skills-lock.arsync` を用いることで、プロジェクトにかかわる全員が同一のスキルバージョンを使用することを保証します。
-- **⚡ 超高速 Git キャッシュ**: リポジトリをグローバルなベアキャッシュ（`~/.arsync/cache`）にフェッチするため、sparse-checkoutとworktreeの仕組みにより次回以降のインストールがほぼ瞬時に完了します。
-- **🛡️ Agent Skills の整合性検証**: `SKILL.md` のフロントマター（`name`, `description`）を自動解析し、Agent Skills の仕様に準拠しているかをチェック。設定に不備がある場合は親切な警告を出力します。
-- **💡 スマート・アップデート**: まず `git ls-remote` を使用してリモートのハッシュを確認してからフェッチを実行するため、スキルが最新の場合はディスクI/Oがゼロです。
-- **🎨 対話型の初期化**: `npm init` 風のモダンな対話プロンプトで簡単にプロジェクトのマニフェストをセットアップできます。
+**ArteSync** はRustで構築された爆速のパッケージマネージャーCLIであり、Claude、Cursor、GeminiなどのAIコーディングアシスタント向けの **Agent Skills**を複数のプロジェクトやリポジトリ間で同期するために特化して設計されています。
 
 ## 📦 インストール方法
 
-`npm` を使用してグローバルにインストールできます（Windows、Mac、Linux用のネイティブバイナリをシームレスな Optional Dependencies で解決します）。
+`npm` を使用してグローバルにインストールできます。
 
 ```bash
 npm install -g artesync
-```
-
-_Rustのエコシステムを好む場合はこちら:_
-
-```bash
-cargo install --git https://github.com/TsuruPong/artesync artesync
 ```
 
 ## 🏎️ クイックスタート
@@ -44,23 +31,12 @@ cargo install --git https://github.com/TsuruPong/artesync artesync
 arsync init
 ```
 
-対話型のプロンプトが起動し、`name` と `description` を設定して `skills.arsync` JSON マニフェストファイルを作成します。
+対話型のプロンプトが起動し、`name` と `description`、`install-dir` を設定して `skills.arsync` JSON マニフェストファイルを作成します。
 
 ### 2. インストール先のディレクトリ設定（オプション）
 
-作成された `skills.arsync` を開いて、同期するスキルのインストール先を `"install-dir"` フィールドで指定します。
-
 - `"install-dir"` を指定しない場合、スキルは `skills.arsync` ファイルと同じディレクトリ（通常はプロジェクトルート）に直接インストールされます。
 - 任意のディレクトリ（例: `.gemini/antigravity/skills`）を指定すると、ArteSyncがそのディレクトリを自動で作成し、すべてのスキルをその中に整理して配置します。
-
-```json
-{
-	"name": "my-project",
-	"description": "My awesome AI-powered project",
-	"install-dir": ".gemini/antigravity/skills",
-	"dependencies": {}
-}
-```
 
 ### 3. スキルのインストール
 
@@ -117,4 +93,6 @@ ArteSyncは指定されたコミットを取得し、`.gemini/antigravity/skills
 
 ---
 
-_Created with ❤️ by the ArteSync Team. Licensed under the MIT License._
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
