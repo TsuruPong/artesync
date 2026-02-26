@@ -61,8 +61,25 @@ impl<'a, M: ManifestRepository, L: LockfileRepository, F: FileSystem> InitUseCas
         io::stdin().read_line(&mut input_desc).unwrap();
         let final_desc = input_desc.trim().to_string();
             
-        let manifest = Manifest::new(skill_name.clone(), final_desc.clone());
-        let lockfile = crate::core::domain::lockfile::Lockfile::new(skill_name, final_desc, None);
+        // Prompt for Install Directory
+        let default_install_dir = ".gemini/antigravity/skills";
+        print!("install directory: ({}) ", default_install_dir.cyan());
+        io::stdout().flush().unwrap();
+        
+        let mut input_dir = String::new();
+        io::stdin().read_line(&mut input_dir).unwrap();
+        let input_dir = input_dir.trim();
+        
+        let final_install_dir = if input_dir.is_empty() {
+            default_install_dir.to_string()
+        } else {
+            input_dir.to_string()
+        };
+        let final_install_path = std::path::PathBuf::from(final_install_dir);
+            
+        let mut manifest = Manifest::new(skill_name.clone(), final_desc.clone());
+        manifest.install_dir = Some(final_install_path.clone());
+        let lockfile = crate::core::domain::lockfile::Lockfile::new(skill_name, final_desc, Some(final_install_path));
         
         self.manifest_repo.save(&manifest_path, &manifest)?;
         self.lockfile_repo.save(&lockfile_path, &lockfile)?;
