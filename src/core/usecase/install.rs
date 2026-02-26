@@ -22,7 +22,7 @@ impl<'a, M: ManifestRepository, S: SkillFetcher, L: LockfileRepository> InstallU
         let manifest_path = dir.join("skills.arsync");
         let mut manifest = self.manifest_repo.load(&manifest_path)?;
 
-        let lockfile_path = dir.join("skills.arsync.lock");
+        let lockfile_path = dir.join("skills-lock.arsync");
         let mut lockfile = self.lockfile_repo.load(&lockfile_path).unwrap_or_else(|_| crate::core::domain::lockfile::Lockfile::new());
 
         let install_base = manifest.install_dir.clone().unwrap_or_else(|| dir.to_path_buf());

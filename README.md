@@ -14,7 +14,7 @@
 ## ✨ Key Features
 
 - **🚀 Zero NodeJS Dependency**: Installable via NPM, but runs natively as a compiled Rust executable.
-- **🔒 Deterministic Lockfiles**: Guarantees identical skill versions for everyone on the project using `skills.arsync.lock`.
+- **🔒 Deterministic Lockfiles**: Guarantees identical skill versions for everyone on the project using `skills-lock.arsync`.
 - **⚡ Ultra-Fast Git Caching**: Fetches repositories into a global bare cache (`~/.arsync/cache`), making subsequent installs nearly instant via sparse-checkout and worktrees.
 - **🛡️ Agent Skills Validation**: Automatically parses `SKILL.md` frontmatter (`name`, `description`) to ensure compliance with Agent Skills specifications, issuing helpful warnings for misconfigured skills.
 - **💡 Smart Updates**: Uses `git ls-remote` to check remote hashes _before_ fetching, ensuring zero disk I/O if your skills are already up to date.
@@ -70,7 +70,7 @@ Point ArteSync to any centralized Git repository containing agent skills:
 arsync install anthropics/skills/skills/skill-creator#main
 ```
 
-ArteSync will fetch the code, place it in `.gemini/antigravity/skills/skill-creator`, update your `skills.arsync` manifest, and generate a `skills.arsync.lock` file locking the commit hash.
+ArteSync will fetch the code, place it in `.gemini/antigravity/skills/skill-creator`, update your `skills.arsync` manifest, and generate a `skills-lock.arsync` file locking the commit hash.
 
 ## 🧰 Commands Reference
 
@@ -81,7 +81,7 @@ ArteSync will fetch the code, place it in `.gemini/antigravity/skills/skill-crea
     - `--branch <NAME>` (Mutually exclusive with `--tag`)
     - `--tag <NAME>`
   - _Example:_ `arsync install --owner anthropics --repository skills --path skills/skill-creator --branch main`
-- **`arsync install`**: (No arguments) Reads the `skills.arsync` manifest and `skills.arsync.lock`. Performs a **hard checkout** to the exact commit hashes specified in the lockfile to perfectly restore your environment.
+- **`arsync install`**: (No arguments) Reads the `skills.arsync` manifest and `skills-lock.arsync`. Performs a **hard checkout** to the exact commit hashes specified in the lockfile to perfectly restore your environment.
 - **`arsync update`**: Checks remote origins for updates via `ls-remote`. If a newer commit exists, it fetches the changes, updates the skills, runs soft validation, and rewrites the lockfile hash.
 - **`arsync list`**: Displays all currently installed skills.
 - **`arsync uninstall <skill>`**: Completely removes the skill folder from your filesystem, manifest, and lockfile.
@@ -103,7 +103,7 @@ Your declarative truth for what agent skills your project needs.
 }
 ```
 
-### Lockfile (`skills.arsync.lock`)
+### Lockfile (`skills-lock.arsync`)
 
 Automatically generated mapping of skills to specific Git Commit Hashes. **Commit this to version control.**
 

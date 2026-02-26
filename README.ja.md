@@ -14,7 +14,7 @@
 ## ✨ 主な機能
 
 - **🚀 NodeJS 依存なし**: NPM 経由でインストール可能ですが、ネイティブコンパイルされたRust実行可能ファイルとして動作します。
-- **🔒 確定的な Lockfile**: `skills.arsync.lock` を用いることで、プロジェクトにかかわる全員が同一のスキルバージョンを使用することを保証します。
+- **🔒 確定的な Lockfile**: `skills-lock.arsync` を用いることで、プロジェクトにかかわる全員が同一のスキルバージョンを使用することを保証します。
 - **⚡ 超高速 Git キャッシュ**: リポジトリをグローバルなベアキャッシュ（`~/.arsync/cache`）にフェッチするため、sparse-checkoutとworktreeの仕組みにより次回以降のインストールがほぼ瞬時に完了します。
 - **🛡️ Agent Skills の整合性検証**: `SKILL.md` のフロントマター（`name`, `description`）を自動解析し、Agent Skills の仕様に準拠しているかをチェック。設定に不備がある場合は親切な警告を出力します。
 - **💡 スマート・アップデート**: まず `git ls-remote` を使用してリモートのハッシュを確認してからフェッチを実行するため、スキルが最新の場合はディスクI/Oがゼロです。
@@ -70,7 +70,7 @@ Agent Skills を含む中央Gitリポジトリのパスを指定します：
 arsync install anthropics/skills/skills/skill-creator#main
 ```
 
-ArteSyncは指定されたコミットを取得し、`.gemini/antigravity/skills/skill-creator` に配置したうえで、`skills.arsync` マニフェストを更新し、参照コミットのハッシュをロックするための `skills.arsync.lock` ファイルを生成します。
+ArteSyncは指定されたコミットを取得し、`.gemini/antigravity/skills/skill-creator` に配置したうえで、`skills.arsync` マニフェストを更新し、参照コミットのハッシュをロックするための `skills-lock.arsync` ファイルを生成します。
 
 ## 🧰 コマンドリファレンス
 
@@ -81,7 +81,7 @@ ArteSyncは指定されたコミットを取得し、`.gemini/antigravity/skills
     - `--branch <NAME>` (`--tag`と排他利用)
     - `--tag <NAME>`
   - _例:_ `arsync install --owner anthropics --repository skills --path skills/skill-creator --branch main`
-- **`arsync install`**: (引数なし) `skills.arsync` マニフェストと `skills.arsync.lock` を読み込みます。ロックファイルに指定された正確なコミットハッシュに対して **ハードチェックアウト** を実行し、環境を完全に復元します。
+- **`arsync install`**: (引数なし) `skills.arsync` マニフェストと `skills-lock.arsync` を読み込みます。ロックファイルに指定された正確なコミットハッシュに対して **ハードチェックアウト** を実行し、環境を完全に復元します。
 - **`arsync update`**: `ls-remote` を経由してリモートリポジトリの更新を確認します。より新しいコミットが存在する場合、変更をフェッチしてスキルを更新し、検証を行い、ロックファイルのハッシュを書き換えます。
 - **`arsync list`**: 現在インストールされているすべてのスキルを一覧表示します。
 - **`arsync uninstall <skill>`**: スキルのフォルダをファイルシステムから完全に削除し、マニフェストとロックファイルからも削除します。
@@ -103,7 +103,7 @@ ArteSyncは指定されたコミットを取得し、`.gemini/antigravity/skills
 }
 ```
 
-### ロックファイル (`skills.arsync.lock`)
+### ロックファイル (`skills-lock.arsync`)
 
 各スキルと特定の Git コミットハッシュの対応関係を自動生成します。**このファイルは必ずバージョン管理にコミットしてください。**
 

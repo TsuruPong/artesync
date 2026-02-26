@@ -20,7 +20,7 @@ impl<'a, M: ManifestRepository, F: FileSystem, L: LockfileRepository> UninstallU
         let manifest_path = dir.join("skills.arsync");
         let mut manifest = self.manifest_repo.load(&manifest_path)?;
 
-        let lockfile_path = dir.join("skills.arsync.lock");
+        let lockfile_path = dir.join("skills-lock.arsync");
         let mut lockfile = self.lockfile_repo.load(&lockfile_path).unwrap_or_else(|_| crate::core::domain::lockfile::Lockfile::new());
 
         if !manifest.dependencies.contains_key(skill_key) {
